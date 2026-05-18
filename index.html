@@ -112,8 +112,8 @@
   <link rel="preload" as="image" href="brand_assets/opt/hero-bg.webp" type="image/webp" />
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Fonts load async — removes 750 ms render-block; display=swap keeps text visible -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet" /></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
   <!-- Defer Lucide — removes 800 ms render-block; icons load after paint -->
   <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
@@ -133,11 +133,12 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'kern' 1, 'liga' 1;
     }
 
     /* ── TOPBAR ── */
@@ -195,7 +196,7 @@
     .call-btn {
       display: inline-flex; align-items: center; gap: .4rem;
       background: var(--text); color: var(--white);
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .8rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .8rem;
       letter-spacing: .04em; padding: .55rem 1.35rem; border-radius: 50px;
       text-decoration: none;
       transition: opacity .2s ease, transform .2s ease;
@@ -250,8 +251,8 @@
       border-top: 1px solid rgba(255,255,255,.12);
     }
     .hero-stat-divider { width: 1px; background: rgba(255,255,255,.12); align-self: stretch; }
-    .hero-stat-label { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .2rem; font-weight: 300; }
-    .hero-stat-n { font-size: clamp(1.9rem,3vw,2.6rem); font-weight: 700; color: #fff; line-height: 1; }
+    .hero-stat-label { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .2rem; font-weight: 400; }
+    .hero-stat-n { font-family: 'Poppins', sans-serif; font-size: clamp(1.9rem,3vw,2.6rem); font-weight: 700; color: #fff; line-height: 1; letter-spacing: -.02em; }
 
     /* ── SECTION HELPERS ── */
     .sec { padding: 6rem 2.5rem; }
@@ -268,31 +269,34 @@
     .lbl::before { content: ''; width: 18px; height: 1.5px; background: var(--border); flex-shrink: 0; }
 
     /* ── HEADINGS ── */
+    h1, h2, h3, h4, h5, h6, .h1, .h2 {
+      font-family: 'Poppins', sans-serif;
+    }
     .h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 700; line-height: 1.08; letter-spacing: -.03em;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 700; line-height: 1.06; letter-spacing: -.025em;
       color: #fff;
     }
     .h1 span { color: #5BC8F5; }
     .h2 {
       font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 600; line-height: 1.18; letter-spacing: -.02em;
+      font-weight: 700; line-height: 1.15; letter-spacing: -.02em;
       color: var(--text);
     }
     .h2-light { color: var(--white); }
 
     /* ── BODY TEXT ── */
-    .body-lg { font-size: 1.05rem; line-height: 1.75; color: var(--muted); font-weight: 300; }
-    .body-sm { font-size: .9rem; line-height: 1.72; color: var(--muted); }
+    .body-lg { font-size: 1.05rem; line-height: 1.78; color: var(--muted); font-weight: 400; }
+    .body-sm { font-size: .9rem; line-height: 1.75; color: var(--muted); font-weight: 400; }
 
     /* ── HERO BODY TEXT ── */
-    .hero-body { font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,.68); font-weight: 300; }
+    .hero-body { font-size: 1.05rem; line-height: 1.78; color: rgba(255,255,255,.72); font-weight: 400; }
 
     /* ── BUTTONS ── */
     .btn-primary {
       display: inline-flex; align-items: center; gap: .5rem;
       background: var(--text); color: var(--white);
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .92rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
       letter-spacing: .02em; padding: .88rem 2.1rem; border-radius: 50px;
       text-decoration: none;
       transition: opacity .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
@@ -317,7 +321,7 @@
     .btn-wa-hero {
       display: inline-flex; align-items: center; gap: .5rem;
       background: rgba(255,255,255,.08); color: rgba(255,255,255,.88);
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .92rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
       letter-spacing: .02em; padding: .9rem 2.2rem; border-radius: 50px;
       border: 1.5px solid rgba(255,255,255,.22); text-decoration: none;
       backdrop-filter: blur(8px);
@@ -328,7 +332,7 @@
     .btn-ghost {
       display: inline-flex; align-items: center; gap: .5rem;
       background: transparent; color: var(--text);
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .92rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
       letter-spacing: .02em; padding: .88rem 2.1rem; border-radius: 50px;
       border: 1.5px solid var(--border); text-decoration: none;
       transition: border-color .2s ease, transform .2s ease, background .2s ease;
@@ -426,8 +430,10 @@
 
     /* ── PROCESS STEP ── */
     .step-num-lrg {
+      font-family: 'Poppins', sans-serif;
       font-size: 2.8rem; font-weight: 700;
       color: var(--border); line-height: 1; margin-bottom: -0.6rem;
+      letter-spacing: -.03em;
     }
 
     /* ── TESTIMONIAL ── */
@@ -450,7 +456,7 @@
       width: 100%; text-align: left; background: none; border: none; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 0; gap: 1.2rem;
-      font-family: 'Poppins', sans-serif; font-weight: 500; font-size: .93rem;
+      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .95rem;
       color: var(--text); transition: color .2s ease;
     }
     .faq-q:hover { color: var(--brand); }
@@ -464,7 +470,7 @@
     }
     .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--text); color: var(--text); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
-    .faq-a-inner { padding-bottom: 1.2rem; color: var(--muted); line-height: 1.78; font-size: .88rem; font-weight: 300; }
+    .faq-a-inner { padding-bottom: 1.2rem; color: var(--muted); line-height: 1.82; font-size: .9rem; font-weight: 400; }
 
     /* ── IMG CARD ── */
     .img-card { border-radius: 16px; overflow: hidden; }
@@ -472,7 +478,7 @@
     .img-card:hover img { transform: scale(1.03); }
 
     /* ── STAT (hero) ── */
-    .stat-n { font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; color: var(--text); line-height: 1; }
+    .stat-n { font-family: 'Poppins', sans-serif; font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -.02em; }
 
     /* ── FADE-IN (below-fold, driven by IntersectionObserver) ── */
     .fi { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s cubic-bezier(.25,.46,.45,.94); }
@@ -653,27 +659,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="icon-box">
           <i data-lucide="trending-up" style="width:20px;height:20px;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.65rem;">Bills That Never Stop Rising</h3>
+        <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:.65rem;">Bills That Never Stop Rising</h3>
         <p class="body-sm">Fuel surcharges, tariff hikes, and taxes make every bill a new shock. Your electricity costs more each year while reliability stays the same.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--brand);">Solar eliminates this — permanently.</div>
+        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar eliminates this — permanently.</div>
       </div>
 
       <div class="card fi d2">
         <div class="icon-box">
           <i data-lucide="zap-off" style="width:20px;height:20px;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.65rem;">Load Shedding Disrupts Everything</h3>
+        <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:.65rem;">Load Shedding Disrupts Everything</h3>
         <p class="body-sm">Hours without power in Karachi's heat. Work stops. Children can't study. AC shuts off. K-Electric's reliability hasn't improved in years.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--brand);">Solar keeps your home running, always.</div>
+        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar keeps your home running, always.</div>
       </div>
 
       <div class="card fi d3">
         <div class="icon-box">
           <i data-lucide="alert-circle" style="width:20px;height:20px;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.65rem;">Fear of Unreliable Installers</h3>
+        <h3 style="font-weight:700;font-size:1.05rem;margin-bottom:.65rem;">Fear of Unreliable Installers</h3>
         <p class="body-sm">Karachi is full of solar sellers who disappear after installation. Wrong sizing, substandard equipment, zero support. One bad decision costs more than it saves.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--brand);">APC Solar is your long-term partner.</div>
+        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">APC Solar is your long-term partner.</div>
       </div>
     </div>
   </div>
@@ -704,35 +710,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="benefit-row">
             <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Bills Drop 60–90% From Day One</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Bills Drop 60–90% From Day One</div>
               <div class="body-sm">Real money back in your pocket every single month, for decades.</div>
             </div>
           </div>
           <div class="benefit-row">
             <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Reliable Power During Load Shedding</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Reliable Power During Load Shedding</div>
               <div class="body-sm">Your AC, lights, and appliances stay on regardless of K-Electric.</div>
             </div>
           </div>
           <div class="benefit-row">
             <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">25-Year Panel Performance Warranty</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">25-Year Panel Performance Warranty</div>
               <div class="body-sm">Tier-1 panels certified to perform for decades. One smart investment.</div>
             </div>
           </div>
           <div class="benefit-row">
             <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Live Monitoring on Your Phone</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Live Monitoring on Your Phone</div>
               <div class="body-sm">Track production, savings, and system health in real-time from anywhere.</div>
             </div>
           </div>
           <div class="benefit-row">
             <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Higher Property Value</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Higher Property Value</div>
               <div class="body-sm">A solar-powered home is a more attractive and valuable property in Karachi's market.</div>
             </div>
           </div>
@@ -760,7 +766,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
             </div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Proper System Sizing</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Proper System Sizing</div>
               <div class="body-sm">We analyse your actual bills before designing. No guessing, no overselling.</div>
             </div>
           </div>
@@ -769,7 +775,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
             </div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">No-Compromise Components — Right Down to the Wiring</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">No-Compromise Components — Right Down to the Wiring</div>
               <div class="body-sm">Down to the breakers, fuses, and cables. Fire risk starts with the parts nobody sees — so we don't cut corners there either.</div>
             </div>
           </div>
@@ -778,7 +784,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
             </div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Experienced Installation Team</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Experienced Installation Team</div>
               <div class="body-sm">Clean, professional workmanship. Your home treated with care, no shortcuts.</div>
             </div>
           </div>
@@ -787,7 +793,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
             </div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Net Metering Handled for You</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Net Metering Handled for You</div>
               <div class="body-sm">We manage the entire K-Electric net metering application process.</div>
             </div>
           </div>
@@ -796,7 +802,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
             </div>
             <div>
-              <div style="font-weight:600;font-size:.93rem;margin-bottom:.2rem;">Responsive After-Sales Support</div>
+              <div style="font-weight:700;font-size:.95rem;margin-bottom:.2rem;">Responsive After-Sales Support</div>
               <div class="body-sm">Real people answer. We don't disappear after installation day.</div>
             </div>
           </div>
@@ -867,7 +873,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <p class="fi d4" style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:2rem;font-weight:300;">
+    <p class="fi d4" style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:2rem;font-weight:400;">
       Every component is sourced from certified global suppliers — no grey-market imports, no substitutes.
     </p>
   </div>
@@ -888,7 +894,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <i data-lucide="phone" style="width:22px;height:22px;color:white;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:.97rem;margin-bottom:.45rem;">Free Consultation</h3>
+        <h3 style="font-weight:700;font-size:1rem;margin-bottom:.45rem;">Free Consultation</h3>
         <p class="body-sm">Call or WhatsApp us. We discuss your bills and energy needs — no obligation, no pressure.</p>
       </div>
       <div class="fi d2">
@@ -896,7 +902,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <i data-lucide="layout-dashboard" style="width:22px;height:22px;color:white;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:.97rem;margin-bottom:.45rem;">Custom System Design</h3>
+        <h3 style="font-weight:700;font-size:1rem;margin-bottom:.45rem;">Custom System Design</h3>
         <p class="body-sm">We design a system sized precisely for your home — right capacity, right components, right budget.</p>
       </div>
       <div class="fi d3">
@@ -904,7 +910,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <i data-lucide="wrench" style="width:22px;height:22px;color:white;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:.97rem;margin-bottom:.45rem;">Professional Installation</h3>
+        <h3 style="font-weight:700;font-size:1rem;margin-bottom:.45rem;">Professional Installation</h3>
         <p class="body-sm">Our trained team completes most homes in 1–3 days. Clean work, zero mess left behind.</p>
       </div>
       <div class="fi d4">
@@ -912,7 +918,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <i data-lucide="shield-check" style="width:22px;height:22px;color:white;"></i>
         </div>
-        <h3 style="font-weight:600;font-size:.97rem;margin-bottom:.45rem;">Ongoing Support</h3>
+        <h3 style="font-weight:700;font-size:1rem;margin-bottom:.45rem;">Ongoing Support</h3>
         <p class="body-sm">We handle the K-Electric paperwork and stay available for all after-sales needs, always.</p>
       </div>
     </div>
@@ -1038,7 +1044,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span style="background:var(--bg-alt);border:1px solid var(--border);border-radius:50px;padding:.45rem 1.1rem;font-size:.82rem;font-weight:500;color:var(--text);">Scheme 33</span>
       <span style="background:var(--bg-alt);border:1px solid var(--border);border-radius:50px;padding:.45rem 1.1rem;font-size:.82rem;font-weight:500;color:var(--text);">Bahria Town</span>
     </div>
-    <p class="fi d3" style="text-align:center;max-width:560px;margin:0 auto;font-size:.88rem;color:var(--muted);line-height:1.72;font-weight:300;">
+    <p class="fi d3" style="text-align:center;max-width:560px;margin:0 auto;font-size:.88rem;color:var(--muted);line-height:1.72;font-weight:400;">
       With over 2 MW installed across Karachi, chances are we've worked on a roof just like yours. Our team handles everything — site assessment, K-Electric paperwork, installation, and commissioning — so you don't have to.
     </p>
 
@@ -1143,19 +1149,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       Your Family Deserves Reliable Power.<br/>Stop Waiting.
     </h2>
 
-    <p class="fi d2" style="font-size:1rem;line-height:1.75;color:rgba(255,255,255,.45);font-weight:300;max-width:520px;margin:0 auto 2.5rem;">
+    <p class="fi d2" style="font-size:1rem;line-height:1.75;color:rgba(255,255,255,.45);font-weight:400;max-width:520px;margin:0 auto 2.5rem;">
       Electricity prices will keep rising. Load shedding won't stop on its own. Every month you delay is another month of overpaying. The right time to go solar is now.
     </p>
 
     <!-- Pull-quote -->
     <div class="fi d3" style="max-width:480px;margin:0 auto 1.8rem;border-left:3px solid var(--brand-lt);padding:.6rem 0 .6rem 1.4rem;text-align:left;">
-      <p style="font-size:1.15rem;font-style:italic;line-height:1.6;color:rgba(255,255,255,.82);font-weight:300;">
+      <p style="font-size:1.15rem;font-style:italic;line-height:1.6;color:rgba(255,255,255,.82);font-weight:400;">
         "The best time to invest in solar was yesterday.<br/>The second best time is now."
       </p>
     </div>
 
     <!-- Scarcity -->
-    <p class="fi d3" style="font-size:.82rem;color:rgba(255,255,255,.38);margin-bottom:2.5rem;font-weight:300;">
+    <p class="fi d3" style="font-size:.82rem;color:rgba(255,255,255,.38);margin-bottom:2.5rem;font-weight:400;">
       We take on a limited number of new installations each month to ensure every system meets our standard. Currently booking <span class="booking-month"></span> installs.
     </p>
 
@@ -1183,13 +1189,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i data-lucide="phone" style="width:16px;height:16px;"></i>
         Call Now
       </a>
-      <a href="https://wa.me/923222749224" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:500;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.2);text-decoration:none;transition:background .2s ease,border-color .2s ease,transform .2s ease;">
+      <a href="https://wa.me/923222749224" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.2);text-decoration:none;transition:background .2s ease,border-color .2s ease,transform .2s ease;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp Now
       </a>
     </div>
 
-    <p class="fi d5" style="margin-top:1.8rem;font-size:.75rem;color:rgba(255,255,255,.2);font-weight:300;">
+    <p class="fi d5" style="margin-top:1.8rem;font-size:.75rem;color:rgba(255,255,255,.2);font-weight:400;">
       +92 322 2749224 &nbsp;·&nbsp; Available 9 AM – 9 PM, 7 days a week
     </p>
   </div>
@@ -1203,7 +1209,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img src="brand_assets/APC Solar Revision 8.svg" alt="APC Solar" style="height:34px;width:auto;opacity:.75;" width="44" height="34" />
         <span style="font-weight:600;font-size:.9rem;color:var(--text);">APC Solar</span>
       </div>
-      <address style="font-style:normal;font-size:.73rem;color:var(--muted);font-weight:300;text-align:center;">
+      <address style="font-style:normal;font-size:.73rem;color:var(--muted);font-weight:400;text-align:center;">
         R206, Sharjah Trade Center, New Chaali, Saddar, Karachi
       </address>
       <div style="display:flex;align-items:center;gap:1.25rem;">
@@ -1211,7 +1217,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="tel:+923222749224" style="font-size:.82rem;font-weight:600;color:var(--brand);text-decoration:none;">+92 322 2749224</a>
       </div>
     </div>
-    <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);font-weight:300;text-align:center;">
+    <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);font-weight:400;text-align:center;">
       © 2025 APC Solar. Karachi, Pakistan. All rights reserved.
     </div>
   </div>
