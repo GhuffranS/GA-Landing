@@ -101,21 +101,19 @@
   <link rel="icon" type="image/svg+xml" href="brand_assets/APC Solar Revision 8.svg" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
-  <!-- Resource hints — reduce connection overhead for every external origin -->
+  <!-- Resource hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="preconnect" href="https://basemaps.cartocdn.com" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Leaflet CSS deferred — map is below fold, not render-critical -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
   <!-- Preload LCP hero image so it starts fetching immediately -->
   <link rel="preload" as="image" href="brand_assets/opt/hero-bg.webp" type="image/webp" />
-  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Fonts load async — removes 750 ms render-block; display=swap keeps text visible -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
-  <!-- Defer Lucide — removes 800 ms render-block; icons load after paint -->
-  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     :root {
       --bg:       #FAFAF8;
@@ -353,7 +351,7 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-bottom: 1.1rem;
     }
-    .icon-box i { color: var(--brand); }
+    .icon-box i, .icon-box svg { color: var(--brand); }
 
     /* ── BENEFIT ROW ── */
     .benefit-row {
@@ -366,7 +364,7 @@
       background: var(--bg-alt); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
     }
-    .benefit-row .check i { color: var(--brand); }
+    .benefit-row .check i, .benefit-row .check svg { color: var(--brand); }
 
     /* ── WHY ROW ── */
     .why-row {
@@ -551,17 +549,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hdr-topbar">
     <div class="hdr-topbar-inner">
       <a href="mailto:sales@apcsolar.pk" class="hdr-topbar-link">
-        <i data-lucide="mail" style="width:11px;height:11px;"></i>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,6.5 12,13.5 22,6.5"/></svg>
         sales@apcsolar.pk
       </a>
       <div class="hdr-topbar-sep"></div>
       <a href="tel:+923222749224" class="hdr-topbar-link">
-        <i data-lucide="phone" style="width:11px;height:11px;"></i>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         +92 322 2749224
       </a>
       <div class="hdr-topbar-sep"></div>
       <span class="hdr-topbar-link address-link" style="cursor:default;">
-        <i data-lucide="map-pin" style="width:11px;height:11px;"></i>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         R206, Sharjah Trade Center, New Chaali, Saddar, Karachi
       </span>
     </div>
@@ -578,7 +576,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </a>
       <a href="tel:+923222749224" class="call-btn">
-        <i data-lucide="phone" style="width:13px;height:13px;"></i>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         Call Now
       </a>
     </div>
@@ -615,7 +613,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- CTAs -->
       <div class="hero-fi d3" style="display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:3.2rem;">
         <a href="tel:+923222749224" class="btn-white">
-          <i data-lucide="phone" style="width:16px;height:16px;"></i>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
           Call Now
         </a>
         <a href="https://wa.me/923222749224" target="_blank" rel="noopener" class="btn-wa-hero">
@@ -657,7 +655,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid-3">
       <div class="card fi d1">
         <div class="icon-box">
-          <i data-lucide="trending-up" style="width:20px;height:20px;"></i>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Bills That Never Stop Rising</h3>
         <p class="body-sm">Fuel surcharges, tariff hikes, and taxes make every bill a new shock. Your electricity costs more each year while reliability stays the same.</p>
@@ -666,7 +664,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="card fi d2">
         <div class="icon-box">
-          <i data-lucide="zap-off" style="width:20px;height:20px;"></i>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="12.41 6.75 13 2 10.57 4.92"/><polyline points="18.57 12.91 21 10 15.66 10"/><polyline points="8 8 3 14 12 14 11 22 16 16"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Load Shedding Disrupts Everything</h3>
         <p class="body-sm">Hours without power in Karachi's heat. Work stops. Children can't study. AC shuts off. K-Electric's reliability hasn't improved in years.</p>
@@ -675,7 +673,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="card fi d3">
         <div class="icon-box">
-          <i data-lucide="alert-circle" style="width:20px;height:20px;"></i>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="3"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Fear of Unreliable Installers</h3>
         <p class="body-sm">Karachi is full of solar sellers who disappear after installation. Wrong sizing, substandard equipment, zero support. One bad decision costs more than it saves.</p>
@@ -708,35 +706,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="fi d3">
           <div class="benefit-row">
-            <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
+            <div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Bills Drop 60–90% From Day One</div>
               <div class="body-sm">Real money back in your pocket every single month, for decades.</div>
             </div>
           </div>
           <div class="benefit-row">
-            <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
+            <div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Reliable Power During Load Shedding</div>
               <div class="body-sm">Your AC, lights, and appliances stay on regardless of K-Electric.</div>
             </div>
           </div>
           <div class="benefit-row">
-            <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
+            <div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">25-Year Panel Performance Warranty</div>
               <div class="body-sm">Tier-1 panels certified to perform for decades. One smart investment.</div>
             </div>
           </div>
           <div class="benefit-row">
-            <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
+            <div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Live Monitoring on Your Phone</div>
               <div class="body-sm">Track production, savings, and system health in real-time from anywhere.</div>
             </div>
           </div>
           <div class="benefit-row">
-            <div class="check"><i data-lucide="check" style="width:13px;height:13px;"></i></div>
+            <div class="check"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Higher Property Value</div>
               <div class="body-sm">A solar-powered home is a more attractive and valuable property in Karachi's market.</div>
@@ -763,7 +761,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="fi d3">
           <div class="why-row">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-              <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Proper System Sizing</div>
@@ -772,7 +770,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="why-row">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-              <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">No-Compromise Components, Right Down to the Wiring</div>
@@ -781,7 +779,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="why-row">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-              <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Experienced Installation Team</div>
@@ -790,7 +788,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="why-row">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-              <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Net Metering Handled for You</div>
@@ -799,7 +797,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="why-row">
             <div style="width:28px;height:28px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-              <i data-lucide="check" style="width:13px;height:13px;color:white;"></i>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><polyline points="20 6 9 17 4 12"/></svg>
             </div>
             <div>
               <div style="font-weight:600;font-size:.95rem;margin-bottom:.2rem;">Responsive After-Sales Support</div>
@@ -892,7 +890,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fi d1">
         <div class="step-num-lrg">01</div>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
-          <i data-lucide="phone" style="width:22px;height:22px;color:white;"></i>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Free Consultation</h3>
         <p class="body-sm">Call or WhatsApp us. We discuss your bills and energy needs with no obligation and no pressure.</p>
@@ -900,7 +898,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fi d2">
         <div class="step-num-lrg">02</div>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
-          <i data-lucide="layout-dashboard" style="width:22px;height:22px;color:white;"></i>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Custom System Design</h3>
         <p class="body-sm">We design a system sized precisely for your home: right capacity, right components, right budget.</p>
@@ -908,7 +906,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fi d3">
         <div class="step-num-lrg">03</div>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
-          <i data-lucide="wrench" style="width:22px;height:22px;color:white;"></i>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Professional Installation</h3>
         <p class="body-sm">Our trained team completes most homes in 1–3 days. Clean work, zero mess left behind.</p>
@@ -916,7 +914,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="fi d4">
         <div class="step-num-lrg">04</div>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
-          <i data-lucide="shield-check" style="width:22px;height:22px;color:white;"></i>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         </div>
         <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Ongoing Support</h3>
         <p class="body-sm">We handle the K-Electric paperwork and stay available for all after-sales needs, always.</p>
@@ -1066,7 +1064,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>How much can I save on my electricity bill?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">Most APC Solar customers reduce their monthly bill by 60–90%. A homeowner paying Rs. 50,000/month can realistically bring that down to Rs. 3,000–8,000/month. The exact savings depend on your consumption and the system we recommend for your home.</div>
@@ -1076,7 +1074,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>What happens during K-Electric load shedding?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">With a hybrid system, your home keeps running on solar power during outages without any interruption. Basic grid-tied systems without batteries must shut off during outages due to NEPRA safety rules. We'll recommend the right setup for your needs during the free consultation.</div>
@@ -1086,7 +1084,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>How long does the installation take?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">Most residential installations are completed in 1 to 3 days. We work efficiently and cleanly. Our team respects your home, and once installed, your system begins generating energy immediately.</div>
@@ -1096,7 +1094,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>Is net metering included, and how does it work?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">Yes. We handle the complete net metering application and K-Electric approval process. Net metering lets you export excess solar energy back to the grid for bill credits. This can reduce your bill to near zero or carry a credit into the following month.</div>
@@ -1106,7 +1104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>What is the payback period for a solar system?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">Most homeowners in Karachi recover their investment in around 3.5 years. After that, the system generates essentially free electricity for another 18+ years. With electricity prices rising every year, that payback period keeps getting shorter.</div>
@@ -1116,7 +1114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>What happens after installation? How do I get support?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">We don't disappear after installation day. Our after-sales team is reachable by WhatsApp and phone, 9 AM to 9 PM, seven days a week. For any fault or performance question, we respond the same day and dispatch a technician within 72 hours for on-site issues. Your system also includes live remote monitoring, so in most cases we spot and resolve problems before you even notice them.</div>
@@ -1126,7 +1124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faq-item">
           <button class="faq-q" onclick="toggleFaq(this)">
             <span>Do I need to do anything to maintain the system?</span>
-            <span class="faq-icon"><i data-lucide="plus" style="width:11px;height:11px;"></i></span>
+            <span class="faq-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">The main thing a solar system needs is regular panel cleaning to keep efficiency high. Dust builds up on panels and reduces output, so cleaning them periodically, especially during dry months, makes a real difference to your savings. Beyond that, the system runs on its own with no moving parts and no ongoing fuel costs.</div>
@@ -1167,26 +1165,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="fi d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-bottom:2.5rem;">
       <span style="display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:rgba(255,255,255,.45);">
-        <i data-lucide="check" style="width:14px;height:14px;color:rgba(255,255,255,.35);"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:rgba(255,255,255,.35)"><polyline points="20 6 9 17 4 12"/></svg>
         Free consultation
       </span>
       <span style="display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:rgba(255,255,255,.45);">
-        <i data-lucide="check" style="width:14px;height:14px;color:rgba(255,255,255,.35);"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:rgba(255,255,255,.35)"><polyline points="20 6 9 17 4 12"/></svg>
         No-obligation quote
       </span>
       <span style="display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:rgba(255,255,255,.45);">
-        <i data-lucide="check" style="width:14px;height:14px;color:rgba(255,255,255,.35);"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:rgba(255,255,255,.35)"><polyline points="20 6 9 17 4 12"/></svg>
         Tier-1 equipment only
       </span>
       <span style="display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:rgba(255,255,255,.45);">
-        <i data-lucide="check" style="width:14px;height:14px;color:rgba(255,255,255,.35);"></i>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:rgba(255,255,255,.35)"><polyline points="20 6 9 17 4 12"/></svg>
         Net metering handled
       </span>
     </div>
 
     <div class="fi d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
       <a href="tel:+923222749224" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:var(--bg-dark);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;text-decoration:none;transition:opacity .2s ease,transform .2s ease;">
-        <i data-lucide="phone" style="width:16px;height:16px;"></i>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         Call Now
       </a>
       <a href="https://wa.me/923222749224" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.2);text-decoration:none;transition:background .2s ease,border-color .2s ease,transform .2s ease;">
@@ -1225,9 +1223,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ═══ JAVASCRIPT ════════════════════════════════════════ -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    if (typeof lucide !== 'undefined') lucide.createIcons();
-  });
+  document.addEventListener('DOMContentLoaded', () => {});
 
   // Dynamic booking month (always shows next month)
   (function() {
