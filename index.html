@@ -109,7 +109,8 @@
   <!-- Leaflet CSS deferred — map is below fold, not render-critical -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
-  <!-- Preload LCP hero image so it starts fetching immediately -->
+  <!-- Preload LCP elements — logo is now the LCP candidate -->
+  <link rel="preload" as="image" href="brand_assets/APC Solar Revision 8.svg" type="image/svg+xml" />
   <link rel="preload" as="image" href="brand_assets/opt/hero-bg.webp" type="image/webp" />
   <!-- Fonts load async — removes 750 ms render-block; display=swap keeps text visible -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
@@ -569,7 +570,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hdr-main">
     <div class="hdr-inner">
       <a href="#" aria-label="APC Solar home" class="hdr-logo-wrap">
-        <img src="brand_assets/APC Solar Revision 8.svg" alt="APC Solar logo" style="height:40px;width:auto;" width="51" height="40" />
+        <img src="brand_assets/APC Solar Revision 8.svg" alt="APC Solar logo" style="height:40px;width:auto;" width="51" height="40" fetchpriority="high" />
         <div>
           <span class="hdr-brand-name">APC Solar</span>
           <span class="hdr-brand-tag">Karachi's Solar Experts</span>
