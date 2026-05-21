@@ -265,7 +265,7 @@
       font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 1.2rem;
     }
-    .lbl::before { content: ''; width: 18px; height: 1.5px; background: var(--border); flex-shrink: 0; }
+    .lbl::before { content: ''; width: 18px; height: 1.5px; background: #F9C349; flex-shrink: 0; }
 
     /* ── HEADINGS ── */
     h1, h2, h3, h4, h5, h6, .h1, .h2 {
@@ -347,12 +347,12 @@
     .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.06); transform: translateY(-4px); }
 
     .icon-box {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: var(--bg-alt); border: 1px solid var(--border);
+      width: 46px; height: 46px; border-radius: 10px;
+      background: #F9C349; border: none;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; margin-bottom: 1.1rem;
     }
-    .icon-box i, .icon-box svg { color: var(--brand); }
+    .icon-box i { color: #000; font-size: 22px; }
 
     /* ── BENEFIT ROW ── */
     .benefit-row {
@@ -398,7 +398,6 @@
       gap: 1.25rem; width: max-content;
       animation: marquee 36s linear infinite;
     }
-    .marquee-track:hover { animation-play-state: paused; }
     @keyframes marquee {
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -521,8 +520,16 @@
       .hero-max { max-width: 100%; }
       .hero-stats { gap: 1.5rem; }
       .grid-3 { grid-template-columns: 1fr; }
+      .partners-carousel {
+        overflow-x: auto; overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 1rem 1rem;
+      }
+      .partners-carousel::-webkit-scrollbar { display: none; }
       .partners-carousel::before,
-      .partners-carousel::after { width: 60px; }
+      .partners-carousel::after { display: none; }
+      .marquee-track { animation: none; }
       .logo-slide { min-width: 145px; height: 68px; padding: .9rem 1.25rem; }
       #karachi-map { height: 320px !important; }
     }
@@ -536,6 +543,7 @@
       .hero .h1 { font-size: 2.1rem; }
     }
   </style>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -577,7 +585,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </a>
       <a href="tel:+923222749224" class="call-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <i class="ph-fill ph-phone" style="font-size:14px;"></i>
         Call Now
       </a>
     </div>
@@ -597,10 +605,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="hero-content">
     <div class="hero-max">
 
-      <div class="lbl hero-fi" style="color:rgba(255,255,255,.5);">
-        <span style="display:block;width:18px;height:1.5px;background:rgba(255,255,255,.2);"></span>
-        Solar Done Right, Every Detail
-      </div>
+      <div class="lbl hero-fi" style="color:rgba(255,255,255,.5);">Solar Done Right, Every Detail</div>
 
       <h1 class="h1 hero-fi d1" style="margin-bottom:1.4rem;">
         Stop Overpaying<br/>K&#8209;Electric.<br/>
@@ -614,7 +619,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- CTAs -->
       <div class="hero-fi d3" style="display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:3.2rem;">
         <a href="tel:+923222749224" class="btn-white">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <i class="ph-fill ph-phone" style="font-size:17px;"></i>
           Call Now
         </a>
         <a href="https://wa.me/923222749224" target="_blank" rel="noopener" class="btn-wa-hero">
@@ -655,27 +660,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="grid-3">
       <div class="card fi d1">
-        <div class="icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        </div>
+        <div class="icon-box"><i class="ph-bold ph-trend-up"></i></div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Bills That Never Stop Rising</h3>
         <p class="body-sm">Fuel surcharges, tariff hikes, and taxes make every bill a new shock. Your electricity costs more each year while reliability stays the same.</p>
         <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar eliminates this. Permanently.</div>
       </div>
 
       <div class="card fi d2">
-        <div class="icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="12.41 6.75 13 2 10.57 4.92"/><polyline points="18.57 12.91 21 10 15.66 10"/><polyline points="8 8 3 14 12 14 11 22 16 16"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-        </div>
+        <div class="icon-box"><i class="ph-bold ph-lightning-slash"></i></div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Load Shedding Disrupts Everything</h3>
         <p class="body-sm">Hours without power in Karachi's heat. Work stops. Children can't study. AC shuts off. K-Electric's reliability hasn't improved in years.</p>
         <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar keeps your home running, always.</div>
       </div>
 
       <div class="card fi d3">
-        <div class="icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16" stroke-width="3"/></svg>
-        </div>
+        <div class="icon-box"><i class="ph-bold ph-warning"></i></div>
         <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Fear of Unreliable Installers</h3>
         <p class="body-sm">Karachi is full of solar sellers who disappear after installation. Wrong sizing, substandard equipment, zero support. One bad decision costs more than it saves.</p>
         <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">APC Solar is your long-term partner.</div>
@@ -1140,7 +1139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="sec-dark">
   <div class="wrap" style="text-align:center;max-width:680px;margin:0 auto;">
     <div class="fi" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.2rem;">
-      <span style="display:block;width:18px;height:1.5px;background:rgba(255,255,255,.2);"></span>
+      <span style="display:block;width:18px;height:1.5px;background:#F9C349;"></span>
       Take the First Step
     </div>
 
@@ -1185,7 +1184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="fi d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
       <a href="tel:+923222749224" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:var(--bg-dark);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;text-decoration:none;transition:opacity .2s ease,transform .2s ease;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <i class="ph-fill ph-phone" style="font-size:17px;"></i>
         Call Now
       </a>
       <a href="https://wa.me/923222749224" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.2);text-decoration:none;transition:background .2s ease,border-color .2s ease,transform .2s ease;">
@@ -1316,5 +1315,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Vercel Speed Insights -->
 <script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+
+<script>
+(function () {
+  if (!window.matchMedia('(max-width: 640px)').matches) return;
+  const carousel = document.querySelector('.partners-carousel');
+  const track = carousel && carousel.querySelector('.marquee-track');
+  if (!carousel || !track) return;
+
+  let pos = 0;
+  const speed = 0.6;
+  let touching = false;
+  let touchStartX = 0;
+  let scrollAtTouch = 0;
+  let raf;
+
+  function loop() {
+    if (!touching) {
+      pos += speed;
+      const half = track.scrollWidth / 2;
+      if (pos >= half) pos -= half;
+      carousel.scrollLeft = pos;
+    }
+    raf = requestAnimationFrame(loop);
+  }
+
+  carousel.addEventListener('touchstart', function (e) {
+    touching = true;
+    touchStartX = e.touches[0].clientX;
+    scrollAtTouch = carousel.scrollLeft;
+    pos = carousel.scrollLeft;
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', function (e) {
+    const dx = touchStartX - e.touches[0].clientX;
+    const next = scrollAtTouch + dx;
+    const half = track.scrollWidth / 2;
+    pos = ((next % half) + half) % half;
+    carousel.scrollLeft = pos;
+  }, { passive: true });
+
+  carousel.addEventListener('touchend', function () {
+    touching = false;
+  }, { passive: true });
+
+  loop();
+})();
+</script>
 </body>
 </html>
