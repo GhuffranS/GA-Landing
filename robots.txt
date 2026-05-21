@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ghuffrans.github.io/GA-Landing/sitemap.xml
+Sitemap: https://ga.apcsolar.pk/sitemap.xml
