@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56">
+  <!-- Sun icon mark -->
+  <g transform="translate(6,4)">
+    <!-- Outer ring with gap -->
+    <path d="M24 4 A20 20 0 1 1 4.6 32" fill="none" stroke="#0068B7" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Inner rays / wave lines -->
+    <path d="M10 20 Q16 24 10 28 Q16 32 10 36" fill="none" stroke="#0068B7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 16 Q24 20 18 24 Q24 28 18 32" fill="none" stroke="#0068B7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M26 20 Q32 24 26 28 Q32 32 26 36" fill="none" stroke="#0068B7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="60" y="37" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" letter-spacing="-0.3" fill="#0068B7">Sungrow</text>
+</svg>

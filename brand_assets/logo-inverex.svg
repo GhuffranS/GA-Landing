@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56">
+  <!-- Arrow/bolt icon mark -->
+  <g transform="translate(4,8)">
+    <!-- Lightning bolt / power arrow -->
+    <polygon points="22,0 10,20 18,20 8,40 30,16 22,16 32,0" fill="#009843"/>
+    <!-- Outer ring -->
+    <circle cx="20" cy="20" r="18" fill="none" stroke="#009843" stroke-width="2.5"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="58" y="37" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="21" letter-spacing="-0.2" fill="#009843">inverex</text>
+</svg>
