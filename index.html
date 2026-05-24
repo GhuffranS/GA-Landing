@@ -105,8 +105,6 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://unpkg.com" />
-  <link rel="preconnect" href="https://basemaps.cartocdn.com" />
   <!-- Leaflet CSS deferred — map is below fold, not render-critical -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
@@ -491,8 +489,13 @@
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: none; }
     }
+    @keyframes heroSlideUp {
+      from { transform: translateY(10px); }
+      to   { transform: none; }
+    }
     .hero-fi { animation: heroFadeUp .55s cubic-bezier(.25,.46,.45,.94) both; }
-    .hero-fi.d1 { animation-delay: .10s; }
+    /* LCP element must not start at opacity:0 — use transform-only animation */
+    .hero-fi.d1 { animation: heroSlideUp .45s cubic-bezier(.25,.46,.45,.94) both; animation-delay: 0s; }
     .hero-fi.d2 { animation-delay: .22s; }
     .hero-fi.d3 { animation-delay: .34s; }
     .hero-fi.d4 { animation-delay: .46s; }
@@ -1335,6 +1338,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 
 <script>
+requestAnimationFrame(function() {
 (function () {
   if (!window.matchMedia('(max-width: 640px)').matches) return;
   const carousel = document.querySelector('.partners-carousel');
@@ -1379,6 +1383,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   loop();
 })();
+}); // end requestAnimationFrame
 </script>
+
 </body>
 </html>
