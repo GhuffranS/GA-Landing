@@ -494,11 +494,16 @@
       to   { transform: none; }
     }
     .hero-fi { animation: heroFadeUp .55s cubic-bezier(.25,.46,.45,.94) both; }
-    /* LCP element must not start at opacity:0 — use transform-only animation */
-    .hero-fi.d1 { animation: heroSlideUp .45s cubic-bezier(.25,.46,.45,.94) both; animation-delay: 0s; }
-    .hero-fi.d2 { animation-delay: .22s; }
-    .hero-fi.d3 { animation-delay: .34s; }
-    .hero-fi.d4 { animation-delay: .46s; }
+    /* LCP candidates (headline + lead paragraph) must paint on the first frame —
+       transform-only entrance, never opacity:0, so LCP is not gated by the animation */
+    .hero-fi.d1, .hero-fi.d2 { animation: heroSlideUp .45s cubic-bezier(.25,.46,.45,.94) both; }
+    .hero-fi.d1 { animation-delay: 0s; }
+    .hero-fi.d2 { animation-delay: .14s; }
+    .hero-fi.d3 { animation-delay: .26s; }
+    .hero-fi.d4 { animation-delay: .38s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-fi, .fi { animation: none !important; opacity: 1 !important; transform: none !important; }
+    }
 
     /* ── GRID HELPERS ── */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -1350,7 +1355,8 @@ requestAnimationFrame(function() {
   let touching = false;
   let touchStartX = 0;
   let scrollAtTouch = 0;
-  let raf;
+  let raf = null;
+  let onScreen = false;
   // Cache half-width once — reading scrollWidth in rAF causes forced reflow every frame
   let half = track.scrollWidth / 2;
 
@@ -1362,6 +1368,28 @@ requestAnimationFrame(function() {
     }
     raf = requestAnimationFrame(loop);
   }
+  function start() {
+    if (raf === null && onScreen && document.visibilityState === 'visible') {
+      raf = requestAnimationFrame(loop);
+    }
+  }
+  function stop() {
+    if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  // Only animate while the carousel is on-screen and the tab is visible —
+  // avoids burning the main thread (and battery) on a permanent off-screen rAF loop.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      onScreen = entries[0].isIntersecting;
+      if (onScreen) start(); else stop();
+    }, { rootMargin: '120px' }).observe(carousel);
+  } else {
+    onScreen = true; start();
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') start(); else stop();
+  });
 
   carousel.addEventListener('touchstart', function (e) {
     touching = true;
@@ -1380,8 +1408,6 @@ requestAnimationFrame(function() {
   carousel.addEventListener('touchend', function () {
     touching = false;
   }, { passive: true });
-
-  loop();
 })();
 }); // end requestAnimationFrame
 </script>
