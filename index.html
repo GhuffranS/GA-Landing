@@ -112,8 +112,8 @@
   <link rel="preload" as="image" href="brand_assets/APC Solar Revision 8.svg" type="image/svg+xml" />
   <link rel="preload" as="image" href="brand_assets/opt/hero-bg.webp" type="image/webp" fetchpriority="high" />
   <!-- Fonts load async — removes 750 ms render-block; display=swap keeps text visible -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" /></noscript>
   <style>
     :root {
       --bg:       #FAFAF8;
@@ -122,16 +122,37 @@
       --brand:    #005279;
       --brand-lt: #0077AA;
       --gold:     #C49A00;
+      --cta:      #F9C349;
+      --cta-hover:#FFD166;
+      --cta-ink:  #1A1503;
       --text:     #1C1A17;
       --muted:    #6D6A64;
       --border:   #E4E0D8;
       --white:    #FFFFFF;
+
+      /* type system */
+      --font-display: 'Source Serif 4', Georgia, serif;
+      --font-body: 'Source Sans 3', -apple-system, sans-serif;
+      --lh-heading: 1.05;   /* h1–h3: tight 1:1 */
+      --lh-body: 1.55;      /* body: ~1:1.5 */
+      --lh-caption: 1.3;    /* small labels / captions */
+      --track-display: -.025em;
+      --track-cta: .05em;
+
+      /* 8-pt spacing scale */
+      --s-1: .5rem;   /*  8px */
+      --s-2: 1rem;    /* 16px */
+      --s-3: 1.5rem;  /* 24px */
+      --s-4: 2rem;    /* 32px */
+      --s-6: 3rem;    /* 48px */
+      --s-8: 4rem;    /* 64px */
+      --s-12: 6rem;   /* 96px */
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -142,9 +163,10 @@
     /* ── TOPBAR ── */
     .hdr-topbar {
       background: var(--brand);
-      padding: .42rem 2.5rem;
-      font-size: .69rem;
+      padding: .5rem 2.5rem;
+      font-size: .72rem;
       letter-spacing: .01em;
+      line-height: var(--lh-caption);
     }
     .hdr-topbar-inner {
       max-width: 1180px; margin: 0 auto;
@@ -173,7 +195,7 @@
       will-change: transform;
     }
     .hdr-topbar { position: relative; z-index: 501; }
-    .hdr-main { padding: .85rem 2.5rem; }
+    .hdr-main { padding: 1rem 2.5rem; }
     .hdr-inner {
       max-width: 1180px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
@@ -192,14 +214,15 @@
       display: block; margin-top: 1px;
     }
     .call-btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      background: var(--text); color: var(--white);
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .8rem;
-      letter-spacing: .04em; padding: .55rem 1.35rem; border-radius: 50px;
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--cta); color: var(--cta-ink);
+      font-family: var(--font-body); font-weight: 700; font-size: .8rem;
+      letter-spacing: var(--track-cta); padding: .5rem 1.5rem; border-radius: 9999px;
       text-decoration: none;
-      transition: opacity .2s ease, transform .2s ease;
+      box-shadow: 0 2px 12px rgba(196,154,0,.28);
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
     }
-    .call-btn:hover { opacity: .78; transform: translateY(-1px); }
+    .call-btn:hover { background: var(--cta-hover); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(196,154,0,.38); }
     .call-btn:active { transform: scale(.97); }
     .call-btn:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
@@ -229,12 +252,24 @@
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(105deg,
-        rgba(8,22,40,.94) 0%,
-        rgba(8,22,40,.85) 40%,
-        rgba(8,22,40,.50) 65%,
-        rgba(8,22,40,.18) 100%
-      );
+      background:
+        radial-gradient(640px 440px at 0% 0%, rgba(91,200,245,.13), transparent 70%),
+        radial-gradient(720px 520px at 100% 100%, rgba(249,195,73,.14), transparent 70%),
+        radial-gradient(620px 480px at 22% 55%, rgba(8,22,40,.82), transparent 75%),
+        linear-gradient(105deg,
+          rgba(8,22,40,.94) 0%,
+          rgba(8,22,40,.85) 40%,
+          rgba(8,22,40,.50) 65%,
+          rgba(8,22,40,.18) 100%
+        );
+    }
+    /* faint dot-grid so content sits ON something, not floats in void */
+    .hero-overlay::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.65) 1px, transparent 1.5px);
+      background-size: 26px 26px;
+      opacity: .06;
+      pointer-events: none;
     }
     .hero-content {
       position: relative; z-index: 1;
@@ -244,94 +279,117 @@
     }
     .hero-max { max-width: 600px; }
     .hero-stats {
-      display: flex; flex-wrap: wrap; gap: 2.2rem;
+      display: flex; flex-wrap: wrap; gap: 2rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,.12);
     }
     .hero-stat-divider { width: 1px; background: rgba(255,255,255,.12); align-self: stretch; }
-    .hero-stat-label { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .2rem; font-weight: 400; }
-    .hero-stat-n { font-family: 'Poppins', sans-serif; font-size: clamp(1.9rem,3vw,2.6rem); font-weight: 700; color: #fff; line-height: 1; letter-spacing: -.02em; }
+    .hero-stat-label { font-size: .76rem; color: rgba(255,255,255,.5); margin-top: .25rem; font-weight: 400; line-height: var(--lh-caption); }
+    .hero-stat-n { font-family: var(--font-display); font-size: clamp(1.9rem,3vw,2.6rem); font-weight: 700; color: #fff; line-height: 1; letter-spacing: -.02em; }
 
-    /* ── SECTION HELPERS ── */
-    .sec { padding: 6rem 2.5rem; }
-    .sec-alt { padding: 6rem 2.5rem; background: var(--bg-alt); }
-    .sec-dark { padding: 7rem 2.5rem; background: var(--bg-dark); }
+    /* ── SECTION HELPERS — 96px vertical rhythm (8-pt grid) ── */
+    .sec { padding: var(--s-12) 2.5rem; }
+    .sec-alt { padding: var(--s-12) 2.5rem; background: var(--bg-alt); }
+    .sec-dark { padding: var(--s-12) 2.5rem; background: var(--bg-dark); position: relative; overflow: hidden; }
+    .sec-dark::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(560px 400px at 0% 100%, rgba(0,119,170,.18), transparent 70%),
+        radial-gradient(560px 400px at 100% 0%, rgba(249,195,73,.10), transparent 70%);
+      pointer-events: none;
+    }
+    .sec-dark::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.65) 1px, transparent 1.5px);
+      background-size: 26px 26px;
+      opacity: .05;
+      pointer-events: none;
+    }
+    .sec-dark > .wrap { position: relative; z-index: 1; }
     .wrap { max-width: 1180px; margin: 0 auto; }
 
     /* ── SECTION LABEL ── */
     .lbl {
       display: inline-flex; align-items: center; gap: .5rem;
       font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.2rem;
+      color: var(--muted); margin-bottom: 1rem; line-height: var(--lh-caption);
     }
     .lbl::before { content: ''; width: 18px; height: 1.5px; background: #F9C349; flex-shrink: 0; }
 
-    /* ── HEADINGS ── */
-    h1, h2, h3, h4, h5, h6, .h1, .h2 {
-      font-family: 'Poppins', sans-serif;
+    /* ── HEADINGS — serif display for h1/h2, sans for h3+ ── */
+    h1, h2, .h1, .h2 {
+      font-family: var(--font-display);
+    }
+    h3, h4, h5, h6 {
+      font-family: var(--font-body);
+      line-height: var(--lh-caption);
     }
     .h1 {
       font-size: clamp(2.6rem, 6vw, 4.2rem);
-      font-weight: 700; line-height: 1.06; letter-spacing: -.025em;
+      font-weight: 700; line-height: var(--lh-heading); letter-spacing: var(--track-display);
       color: #fff;
     }
     .h1 span { color: #5BC8F5; }
     .h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700; line-height: 1.15; letter-spacing: -.02em;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 600; line-height: 1.1; letter-spacing: -.02em;
       color: var(--text);
     }
     .h2-light { color: var(--white); }
 
     /* ── BODY TEXT ── */
-    .body-lg { font-size: 1.05rem; line-height: 1.78; color: var(--muted); font-weight: 400; }
-    .body-sm { font-size: .9rem; line-height: 1.75; color: var(--muted); font-weight: 400; }
+    .body-lg { font-size: 1.05rem; line-height: var(--lh-body); color: var(--muted); font-weight: 400; max-width: 68ch; }
+    .body-sm { font-size: .95rem; line-height: var(--lh-body); color: var(--muted); font-weight: 400; max-width: 68ch; }
 
     /* ── HERO BODY TEXT ── */
-    .hero-body { font-size: 1.05rem; line-height: 1.78; color: rgba(255,255,255,.72); font-weight: 400; }
+    .hero-body { font-size: 1.1rem; line-height: var(--lh-body); color: rgba(255,255,255,.78); font-weight: 400; }
 
-    /* ── BUTTONS ── */
+    /* ── BUTTONS — one gold for every primary action (squint test) ── */
     .btn-primary {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--text); color: var(--white);
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
-      letter-spacing: .02em; padding: .88rem 2.1rem; border-radius: 50px;
+      background: var(--cta); color: var(--cta-ink);
+      font-family: var(--font-body); font-weight: 700; font-size: .92rem;
+      letter-spacing: var(--track-cta); padding: 1rem 2rem; border-radius: 9999px;
       text-decoration: none;
-      transition: opacity .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 4px 20px rgba(196,154,0,.30);
+      transition: background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
     }
-    .btn-primary:hover { opacity: .8; transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--cta-hover); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,154,0,.40); }
     .btn-primary:active { transform: scale(.97); }
+    .btn-primary:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
 
-    /* White button for hero */
+    /* Hero primary — same gold, slightly larger */
     .btn-white {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: #fff; color: var(--bg-dark);
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
-      letter-spacing: .02em; padding: .9rem 2.2rem; border-radius: 50px;
+      background: var(--cta); color: var(--cta-ink);
+      font-family: var(--font-body); font-weight: 700; font-size: .95rem;
+      letter-spacing: var(--track-cta); padding: 1rem 2rem; border-radius: 9999px;
       text-decoration: none;
-      transition: opacity .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
-      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+      transition: background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+      box-shadow: 0 4px 24px rgba(249,195,73,.35), 0 2px 8px rgba(0,0,0,.2);
     }
-    .btn-white:hover { opacity: .92; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.22); }
+    .btn-white:hover { background: var(--cta-hover); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(249,195,73,.45), 0 2px 8px rgba(0,0,0,.2); }
     .btn-white:active { transform: scale(.97); }
+    .btn-white:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
     /* WA outline for hero */
     .btn-wa-hero {
       display: inline-flex; align-items: center; gap: .5rem;
       background: rgba(255,255,255,.08); color: rgba(255,255,255,.88);
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
-      letter-spacing: .02em; padding: .9rem 2.2rem; border-radius: 50px;
+      font-family: var(--font-body); font-weight: 700; font-size: .95rem;
+      letter-spacing: var(--track-cta); padding: 1rem 2rem; border-radius: 9999px;
       border: 1.5px solid rgba(255,255,255,.22); text-decoration: none;
       backdrop-filter: blur(8px);
     }
     .btn-wa-hero { transition: background .2s ease, border-color .2s ease, transform .2s ease; }
     .btn-wa-hero:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.4); transform: translateY(-2px); }
+    .btn-wa-hero:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
     .btn-ghost {
       display: inline-flex; align-items: center; gap: .5rem;
       background: transparent; color: var(--text);
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
-      letter-spacing: .02em; padding: .88rem 2.1rem; border-radius: 50px;
+      font-family: var(--font-body); font-weight: 700; font-size: .92rem;
+      letter-spacing: var(--track-cta); padding: 1rem 2rem; border-radius: 9999px;
       border: 1.5px solid var(--border); text-decoration: none;
       transition: border-color .2s ease, transform .2s ease, background .2s ease;
     }
@@ -340,22 +398,23 @@
     /* ── CARDS ── */
     .card {
       background: var(--white); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.75rem;
+      border-radius: 16px; padding: var(--s-4);
+      box-shadow: 0 2px 8px rgba(0,82,121,.04);
       transition: box-shadow .25s ease, transform .25s ease;
     }
-    .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.06); transform: translateY(-4px); }
+    .card:hover { box-shadow: 0 8px 32px rgba(0,82,121,.12); transform: translateY(-4px); }
 
     .icon-box {
-      width: 46px; height: 46px; border-radius: 10px;
-      background: #F9C349; border: none;
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--cta); border: none;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-bottom: 1.1rem;
+      flex-shrink: 0; margin-bottom: var(--s-2);
     }
     .icon-box i { color: #000; font-size: 22px; }
 
     /* ── BENEFIT ROW ── */
     .benefit-row {
-      display: flex; gap: .9rem; align-items: flex-start;
+      display: flex; gap: 1rem; align-items: flex-start;
       padding: 1rem 0; border-bottom: 1px solid var(--border);
     }
     .benefit-row:last-child { border-bottom: none; }
@@ -368,7 +427,7 @@
 
     /* ── WHY ROW ── */
     .why-row {
-      display: flex; gap: .9rem; align-items: flex-start;
+      display: flex; gap: 1rem; align-items: flex-start;
       padding: 1rem 0; border-bottom: 1px solid var(--border);
     }
     .why-row:last-child { border-bottom: none; }
@@ -427,16 +486,17 @@
 
     /* ── PROCESS STEP ── */
     .step-num-lrg {
-      font-family: 'Poppins', sans-serif;
+      font-family: var(--font-display);
       font-size: 2.8rem; font-weight: 700;
-      color: var(--border); line-height: 1; margin-bottom: -0.6rem;
+      color: var(--border); line-height: 1; margin-bottom: -0.5rem;
       letter-spacing: -.03em;
     }
 
     /* ── TESTIMONIAL ── */
     .testi-card {
       background: var(--white); border: 1px solid var(--border);
-      border-radius: 14px; padding: 2rem;
+      border-radius: 16px; padding: var(--s-4);
+      box-shadow: 0 2px 8px rgba(0,82,121,.04);
     }
     .testi-avatar {
       width: 36px; height: 36px; border-radius: 50%;
@@ -452,8 +512,8 @@
     .faq-q {
       width: 100%; text-align: left; background: none; border: none; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 0; gap: 1.2rem;
-      font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .95rem;
+      padding: 1.5rem 0; gap: 1rem;
+      font-family: var(--font-body); font-weight: 700; font-size: 1rem;
       color: var(--text); transition: color .2s ease;
     }
     .faq-q:hover { color: var(--brand); }
@@ -467,7 +527,7 @@
     }
     .faq-item.open .faq-icon { transform: rotate(45deg); border-color: var(--text); color: var(--text); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .38s ease; }
-    .faq-a-inner { padding-bottom: 1.2rem; color: var(--muted); line-height: 1.8; font-size: .9rem; font-weight: 400; }
+    .faq-a-inner { padding-bottom: 1.5rem; color: var(--muted); line-height: var(--lh-body); font-size: .95rem; font-weight: 400; max-width: 62ch; }
 
     /* ── IMG CARD ── */
     .img-card { border-radius: 16px; overflow: hidden; }
@@ -475,7 +535,7 @@
     .img-card:hover img { transform: scale(1.03); }
 
     /* ── STAT (hero) ── */
-    .stat-n { font-family: 'Poppins', sans-serif; font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -.02em; }
+    .stat-n { font-family: var(--font-display); font-size: clamp(2rem,3.5vw,2.8rem); font-weight: 700; color: var(--text); line-height: 1; letter-spacing: -.02em; }
 
     /* ── FADE-IN (below-fold, driven by IntersectionObserver) ── */
     .fi { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s cubic-bezier(.25,.46,.45,.94); }
@@ -506,9 +566,9 @@
     }
 
     /* ── GRID HELPERS ── */
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-8); align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s-3); }
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--s-4); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -602,7 +662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <!-- ═══ WHATSAPP FLOAT ═══════════════════════════════════ -->
-<a href="https://wa.me/923222749224" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat with APC Solar on WhatsApp">
+<a href="https://wa.me/923222749224?text=Hi%20APC%20Solar%2C%20I%27m%20interested%20in%20a%20solar%20system%20for%20my%20home%20in%20Karachi.%20Can%20I%20get%20a%20free%20consultation%3F" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Chat with APC Solar on WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -615,22 +675,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="lbl hero-fi" style="color:rgba(255,255,255,.5);">Solar Done Right, Every Detail</div>
 
-      <h1 class="h1 hero-fi d1" style="margin-bottom:1.4rem;">
+      <h1 class="h1 hero-fi d1" style="margin-bottom:1.5rem;">
         Stop Overpaying<br/>K&#8209;Electric.<br/>
         <span>Go Solar.</span>
       </h1>
 
-      <p class="hero-body hero-fi d2" style="max-width:490px;margin-bottom:2.2rem;">
+      <p class="hero-body hero-fi d2" style="max-width:480px;margin-bottom:2rem;">
         Cut your electricity bill by up to 90% and end load-shedding disruption. Every system we build is done right, down to the last breaker, fuse, and wire.
       </p>
 
       <!-- CTAs -->
-      <div class="hero-fi d3" style="display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:3.2rem;">
+      <div class="hero-fi d3" style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;">
         <a href="tel:+923222749224" class="btn-white">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.3 1l-2.2 2.2z"/></svg>
           Call Now
         </a>
-        <a href="https://wa.me/923222749224" target="_blank" rel="noopener" class="btn-wa-hero">
+        <a href="https://wa.me/923222749224?text=Hi%20APC%20Solar%2C%20I%27m%20interested%20in%20a%20solar%20system%20for%20my%20home%20in%20Karachi.%20Can%20I%20get%20a%20free%20consultation%3F" target="_blank" rel="noopener" class="btn-wa-hero">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp Now
         </a>
@@ -661,7 +721,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ PAIN POINTS ══════════════════════════════════════ -->
 <section class="sec-alt">
   <div class="wrap">
-    <div style="text-align:center;max-width:560px;margin:0 auto 3.5rem;">
+    <div style="text-align:center;max-width:560px;margin:0 auto 3rem;">
       <div class="lbl fi" style="justify-content:center;">The Problem</div>
       <h2 class="h2 fi d1">Three Frustrations Every Karachi Homeowner Knows</h2>
     </div>
@@ -669,23 +729,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid-3">
       <div class="card fi d1">
         <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Bills That Never Stop Rising</h3>
+        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.5rem;">Bills That Never Stop Rising</h3>
         <p class="body-sm">Fuel surcharges, tariff hikes, and taxes make every bill a new shock. Your electricity costs more each year while reliability stays the same.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar eliminates this. Permanently.</div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.8rem;font-weight:600;color:var(--brand);">Solar eliminates this. Permanently.</div>
       </div>
 
       <div class="card fi d2">
         <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/><line x1="2" y1="2" x2="22" y2="22"/></svg></div>
-        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Load Shedding Disrupts Everything</h3>
+        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.5rem;">Load Shedding Disrupts Everything</h3>
         <p class="body-sm">Hours without power in Karachi's heat. Work stops. Children can't study. AC shuts off. K-Electric's reliability hasn't improved in years.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">Solar keeps your home running, always.</div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.8rem;font-weight:600;color:var(--brand);">Solar keeps your home running, always.</div>
       </div>
 
       <div class="card fi d3">
         <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.65rem;">Fear of Unreliable Installers</h3>
+        <h3 style="font-weight:600;font-size:1.05rem;margin-bottom:.5rem;">Fear of Unreliable Installers</h3>
         <p class="body-sm">Karachi is full of solar sellers who disappear after installation. Wrong sizing, substandard equipment, zero support. One bad decision costs more than it saves.</p>
-        <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;font-weight:600;color:var(--brand);">APC Solar is your long-term partner.</div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.8rem;font-weight:600;color:var(--brand);">APC Solar is your long-term partner.</div>
       </div>
     </div>
   </div>
@@ -698,7 +758,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Left: Image -->
       <div class="fi">
-        <div class="img-card" style="height:520px;box-shadow:0 6px 30px rgba(0,0,0,.08);">
+        <div class="img-card" style="height:520px;box-shadow:0 8px 32px rgba(0,82,121,.15);">
           <picture>
             <source srcset="brand_assets/opt/install-large.webp" type="image/webp" />
             <img src="brand_assets/PXL_20241117_105927063.RAW-01.MP.COVER.jpg" alt="Elevated solar installation Karachi" loading="lazy" decoding="async" />
@@ -710,7 +770,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="lbl fi">Life After Solar</div>
         <h2 class="h2 fi d1" style="margin-bottom:1rem;">What Changes the Day Your System Goes Live</h2>
-        <p class="body-sm fi d2" style="margin-bottom:1.8rem;">Hundreds of Karachi homeowners have made the switch. Here is exactly what gets better from day one.</p>
+        <p class="body-sm fi d2" style="margin-bottom:2rem;">Hundreds of Karachi homeowners have made the switch. Here is exactly what gets better from day one.</p>
 
         <div class="fi d3">
           <div class="benefit-row">
@@ -764,7 +824,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div>
         <div class="lbl fi">Why APC Solar</div>
         <h2 class="h2 fi d1" style="margin-bottom:1rem;">Not All Solar Companies Are the Same</h2>
-        <p class="body-sm fi d2" style="margin-bottom:1.8rem;">We were built for Karachi homeowners who want a system that actually works, not a cheap install that creates new problems down the line.</p>
+        <p class="body-sm fi d2" style="margin-bottom:2rem;">We were built for Karachi homeowners who want a system that actually works, not a cheap install that creates new problems down the line.</p>
 
         <div class="fi d3">
           <div class="why-row">
@@ -817,19 +877,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- Right: Photo grid -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;" class="fi d2">
-        <div class="img-card" style="height:240px;grid-column:span 2;box-shadow:0 4px 20px rgba(0,0,0,.08);">
+        <div class="img-card" style="height:240px;grid-column:span 2;box-shadow:0 8px 32px rgba(0,82,121,.13);">
           <picture>
             <source srcset="brand_assets/opt/install-sunset.webp" type="image/webp" />
             <img src="brand_assets/IMG_1541.JPG.jpeg" alt="APC Solar installation at sunset" loading="lazy" decoding="async" />
           </picture>
         </div>
-        <div class="img-card" style="height:180px;box-shadow:0 4px 20px rgba(0,0,0,.07);">
+        <div class="img-card" style="height:180px;box-shadow:0 8px 32px rgba(0,82,121,.12);">
           <picture>
             <source srcset="brand_assets/opt/install-carport.webp" type="image/webp" />
             <img src="brand_assets/IMG_0857.JPG" alt="Solar carport structure" loading="lazy" decoding="async" />
           </picture>
         </div>
-        <div class="img-card" style="height:180px;box-shadow:0 4px 20px rgba(0,0,0,.07);">
+        <div class="img-card" style="height:180px;box-shadow:0 8px 32px rgba(0,82,121,.12);">
           <picture>
             <source srcset="brand_assets/opt/install-sky.webp" type="image/webp" />
             <img src="brand_assets/IMG_2545.JPG.jpeg" alt="Solar panels against Karachi sky" loading="lazy" decoding="async" />
@@ -844,7 +904,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ GLOBAL PARTNERS ══════════════════════════════════ -->
 <section class="sec">
   <div class="wrap">
-    <div style="text-align:center;max-width:520px;margin:0 auto 2.8rem;">
+    <div style="text-align:center;max-width:520px;margin:0 auto 3rem;">
       <div class="lbl fi" style="justify-content:center;">Global Partners</div>
       <h2 class="h2 fi d1">World-Class Brands. Proven Reliability.</h2>
       <p class="body-sm fi d2" style="margin-top:.8rem;">We install exclusively Tier-1 certified equipment from manufacturers trusted by millions of installations worldwide.</p>
@@ -888,7 +948,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ PROCESS ══════════════════════════════════════════ -->
 <section class="sec-alt">
   <div class="wrap">
-    <div style="text-align:center;max-width:520px;margin:0 auto 3.5rem;">
+    <div style="text-align:center;max-width:520px;margin:0 auto 3rem;">
       <div class="lbl fi" style="justify-content:center;">How It Works</div>
       <h2 class="h2 fi d1">From First Call to Live System</h2>
       <p class="body-sm fi d2" style="margin-top:.8rem;">Four straightforward steps and you're saving on electricity.</p>
@@ -900,7 +960,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.6 19.79 19.79 0 01.56 2 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Free Consultation</h3>
+        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.5rem;">Free Consultation</h3>
         <p class="body-sm">Call or WhatsApp us. We discuss your bills and energy needs with no obligation and no pressure.</p>
       </div>
       <div class="fi d2">
@@ -908,7 +968,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Custom System Design</h3>
+        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.5rem;">Custom System Design</h3>
         <p class="body-sm">We design a system sized precisely for your home: right capacity, right components, right budget.</p>
       </div>
       <div class="fi d3">
@@ -916,7 +976,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Professional Installation</h3>
+        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.5rem;">Professional Installation</h3>
         <p class="body-sm">Our trained team completes most homes in 1–3 days. Clean work, zero mess left behind.</p>
       </div>
       <div class="fi d4">
@@ -924,7 +984,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div style="width:48px;height:48px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;position:relative;z-index:1;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         </div>
-        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.45rem;">Ongoing Support</h3>
+        <h3 style="font-weight:600;font-size:1rem;margin-bottom:.5rem;">Ongoing Support</h3>
         <p class="body-sm">We handle the K-Electric paperwork and stay available for all after-sales needs, always.</p>
       </div>
     </div>
@@ -1032,7 +1092,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ NEIGHBOURHOODS ════════════════════════════════════ -->
 <section class="sec">
   <div class="wrap">
-    <div style="text-align:center;max-width:560px;margin:0 auto 2.8rem;">
+    <div style="text-align:center;max-width:560px;margin:0 auto 3rem;">
       <div class="lbl fi" style="justify-content:center;">Coverage</div>
       <h2 class="h2 fi d1">Installed Across Karachi</h2>
     </div>
@@ -1055,7 +1115,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <!-- Karachi map -->
-    <div class="fi d4" id="karachi-map" style="height:440px;border-radius:16px;overflow:hidden;margin-top:2.8rem;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.06);"></div>
+    <div class="fi d4" id="karachi-map" style="height:440px;border-radius:16px;overflow:hidden;margin-top:3rem;border:1px solid var(--border);box-shadow:0 8px 32px rgba(0,82,121,.12);"></div>
   </div>
 </section>
 
@@ -1160,7 +1220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <!-- Pull-quote -->
-    <div class="fi d3" style="max-width:480px;margin:0 auto 1.8rem;border-left:3px solid var(--brand-lt);padding:.6rem 0 .6rem 1.4rem;text-align:left;">
+    <div class="fi d3" style="max-width:480px;margin:0 auto 2rem;border-left:3px solid var(--brand-lt);padding:.5rem 0 .5rem 1.5rem;text-align:left;">
       <p style="font-size:1.15rem;font-style:italic;line-height:1.6;color:rgba(255,255,255,.82);font-weight:400;">
         "The best time to invest in solar was yesterday.<br/>The second best time is now."
       </p>
@@ -1191,17 +1251,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="fi d4" style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
-      <a href="tel:+923222749224" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:var(--bg-dark);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;text-decoration:none;transition:opacity .2s ease,transform .2s ease;">
+      <a href="tel:+923222749224" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C9.6 21 3 14.4 3 6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.3 1l-2.2 2.2z"/></svg>
         Call Now
       </a>
-      <a href="https://wa.me/923222749224" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:rgba(255,255,255,.7);font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem;letter-spacing:.02em;padding:.95rem 2.4rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.2);text-decoration:none;transition:background .2s ease,border-color .2s ease,transform .2s ease;">
+      <a href="https://wa.me/923222749224?text=Hi%20APC%20Solar%2C%20I%27m%20interested%20in%20a%20solar%20system%20for%20my%20home%20in%20Karachi.%20Can%20I%20get%20a%20free%20consultation%3F" target="_blank" rel="noopener" class="btn-wa-hero" style="font-size:1rem;padding:1rem 2.5rem;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp Now
       </a>
     </div>
 
-    <p class="fi d5" style="margin-top:1.8rem;font-size:.75rem;color:rgba(255,255,255,.2);font-weight:400;">
+    <p class="fi d5" style="margin-top:2rem;font-size:.75rem;color:rgba(255,255,255,.25);font-weight:400;line-height:var(--lh-caption);">
       +92 322 2749224 &nbsp;·&nbsp; Available 9 AM – 9 PM, 7 days a week
     </p>
   </div>
