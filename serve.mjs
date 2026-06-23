@@ -1,6 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import zlib from 'zlib';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -35,7 +36,37 @@ const server = http.createServer((req, res) => {
       res.end('Not found');
       return;
     }
-    res.writeHead(200, { 'Content-Type': contentType });
+
+    const headers = { 'Content-Type': contentType };
+
+    // Cache headers mirror vercel.json: long-lived immutable for static assets,
+    // revalidate for the HTML document.
+    const STATIC = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.woff', '.woff2'];
+    if (STATIC.includes(ext)) {
+      headers['Cache-Control'] = 'public, max-age=31536000, immutable';
+    } else if (ext === '.html') {
+      headers['Cache-Control'] = 'no-cache';
+    }
+
+    // gzip text responses (Vercel serves these compressed in production).
+    const COMPRESSIBLE = ['.html', '.css', '.js', '.mjs', '.json', '.svg'];
+    const acceptsGzip = /\bgzip\b/.test(req.headers['accept-encoding'] || '');
+    if (acceptsGzip && COMPRESSIBLE.includes(ext)) {
+      zlib.gzip(data, (gzErr, gzipped) => {
+        if (gzErr) {
+          res.writeHead(200, headers);
+          res.end(data);
+          return;
+        }
+        headers['Content-Encoding'] = 'gzip';
+        headers['Vary'] = 'Accept-Encoding';
+        res.writeHead(200, headers);
+        res.end(gzipped);
+      });
+      return;
+    }
+
+    res.writeHead(200, headers);
     res.end(data);
   });
 });
