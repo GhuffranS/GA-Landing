@@ -5,8 +5,6 @@ temporary screenshots/
 .DS_Store
 Thumbs.db
 .claude/
-package.json
-package-lock.json
 grab-logos.cjs
 find-jasolar.cjs
 screenshot-*.cjs
