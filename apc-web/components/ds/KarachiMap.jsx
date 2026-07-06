@@ -104,5 +104,5 @@ export default function KarachiMap() {
     return () => { cancelled = true; };
   }, []);
 
-  return <div ref={ref} className="karachi-map" aria-label="Map of APC Solar installations across Karachi" />;
+  return <div ref={ref} className="karachi-map" role="img" aria-label="Map of APC Solar installations across Karachi" />;
 }

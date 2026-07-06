@@ -122,7 +122,7 @@ export function Steps({ steps = [] }) {
             <span className="apc-steps__num">{i + 1}</span>
           </div>
           <div className="apc-steps__text">
-            <h4>{s.title}</h4>
+            <h3>{s.title}</h3>
             <p>{s.body}</p>
           </div>
         </li>
@@ -143,7 +143,7 @@ export function FeatureCard({ icon, title, children }) {
 
 function Stars({ rating = 5, size = 16 }) {
   return (
-    <div className="testi-stars" aria-label={`${rating} out of 5`}>
+    <div className="testi-stars" role="img" aria-label={`${rating} out of 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
         <svg key={n} width={size} height={size} viewBox="0 0 24 24"
           fill={n <= rating ? "var(--apc-yellow)" : "none"}

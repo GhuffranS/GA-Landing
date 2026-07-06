@@ -102,6 +102,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${poppins.variable} ${jost.variable} ${geist.variable}`}>
       <head>
+        {/* Preload the LCP hero image (art-directed: portrait on mobile, wide on desktop) */}
+        <link rel="preload" as="image" href="/images/hero-portrait.webp" media="(max-width: 640px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/hero.webp" media="(min-width: 641px)" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
@@ -126,15 +129,21 @@ export default function RootLayout({ children }) {
           />
         </noscript>
         {children}
-        {/* Google Tag Manager */}
-        <Script id="gtm" strategy="afterInteractive">
+        {/* Google Tag Manager. lazyOnload keeps GTM/GA4/Ads/Clarity fully working
+            but moves its main-thread work to browser idle (off the critical path),
+            so it no longer inflates TBT. Tracking is preserved: dataLayer is
+            initialized early below and the CTAs (tel:/wa.me _blank) never unload
+            the page, so queued events flush once GTM loads. */}
+        <Script id="gtm" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
-        {/* Conversion click events: any element with data-track pushes to dataLayer */}
+        {/* Conversion click events: any element with data-track pushes to dataLayer.
+            afterInteractive so the listener is attached early and clicks are queued
+            in dataLayer even before the GTM container finishes loading. */}
         <Script id="cta-tracking" strategy="afterInteractive">
           {`document.addEventListener('click',function(e){
 var el=e.target.closest('[data-track]');

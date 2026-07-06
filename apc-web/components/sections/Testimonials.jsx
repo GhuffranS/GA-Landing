@@ -3,7 +3,7 @@ import { NAP, TESTIMONIALS } from "@/lib/site";
 
 function Stars() {
   return (
-    <div className="testi-stars" aria-label="5 out of 5">
+    <div className="testi-stars" role="img" aria-label="5 out of 5">
       {[0, 1, 2, 3, 4].map((n) => (
         <svg key={n} width={16} height={16} viewBox="0 0 24 24" fill="var(--apc-yellow)" stroke="var(--apc-yellow)" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />

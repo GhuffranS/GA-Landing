@@ -705,7 +705,7 @@ img { display: block; max-width: 100%; }
   transform: translateY(-50%);
   z-index: -1;
 }
-.apc-steps h4 { font-size: var(--fs-h4); margin-bottom: var(--space-1); }
+.apc-steps h3 { font-size: var(--fs-h4); margin-bottom: var(--space-1); }
 .apc-steps p { font-size: var(--fs-sm); color: var(--text-body); }
 /* stacks vertically — 720 (between --bp-sm and --bp-nav, matches DS Steps) */
 @media (max-width: 720px) {
@@ -946,7 +946,7 @@ img { display: block; max-width: 100%; }
 .site-footer__legal {
   padding-top: var(--space-4);
   font-size: var(--fs-xs);
-  color: rgba(255, 255, 255, 0.38);
+  color: rgba(255, 255, 255, 0.62);
 }
 
 /* ============================================================
