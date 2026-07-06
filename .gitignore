@@ -1,14 +1,7 @@
-node_modules/
-temporary screenshots/
-*.tmp
-*.log
+/node_modules
+/.next
+/out
+/build
 .DS_Store
-Thumbs.db
-.claude/
-package.json
-package-lock.json
-grab-logos.cjs
-find-jasolar.cjs
-screenshot-*.cjs
-get-jasolar-logo.*
-CLAUDE.md
+*.pem
+.env*
