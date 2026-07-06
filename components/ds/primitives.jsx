@@ -14,7 +14,7 @@ export function IconBadge({ name, size = "", className = "" }) {
   // Custom APC glyphs render black from the raw file — correct on the yellow badge.
   return (
     <span className={`apc-icon-badge ${size ? `apc-icon-badge--${size}` : ""} ${className}`}>
-      <img src={`/icons/${name}.svg`} alt="" aria-hidden="true" />
+      <img src={`/icons/${name}.svg`} alt="" aria-hidden="true" loading="lazy" decoding="async" />
     </span>
   );
 }

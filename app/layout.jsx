@@ -40,7 +40,7 @@ export const metadata = {
     siteName: SITE.name,
     locale: "en_PK",
     type: "website",
-    images: [{ url: "/images/hero.webp", width: 2000, height: 1500 }],
+    images: [{ url: "/images/hero.webp", width: 1440, height: 1080 }],
   },
   twitter: {
     card: "summary_large_image",

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { NAP } from "@/lib/site";
 import { ButtonLink, PhoneGlyph } from "@/components/ds/primitives";
 
@@ -43,7 +42,12 @@ export default function Header() {
       </div>
       <div className="apc-container site-header__inner">
         <a href="#top" className="site-header__lockup" aria-label="APC Solar home">
-          <Image src="/logos/apc-logo.svg" alt="" width={44} height={44} priority />
+          {/* Plain <img>, lazy: the SVG is already vector, so next/image added
+              nothing but a high-priority preload that competed with the LCP
+              hero. lazy suppresses that auto-preload; the logo still paints fast
+              because it's in the initial viewport. alt="" — the wordmark beside
+              it carries the brand name. */}
+          <img src="/logos/apc-logo.svg" alt="" width="44" height="44" loading="lazy" decoding="async" />
           <span>
             <span className="site-header__wordmark">APC Solar</span>
             <span className="site-header__tag">Karachi&apos;s solar experts</span>
