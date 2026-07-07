@@ -1,5 +1,7 @@
 import Script from "next/script";
 import { Poppins, Jost, Geist } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE, NAP, FAQS } from "@/lib/site";
 import "./globals.css";
 
@@ -150,6 +152,9 @@ var el=e.target.closest('[data-track]');
 if(el){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:el.getAttribute('data-track')});}
 });`}
         </Script>
+        {/* Vercel Web Analytics + Speed Insights (separate pipeline from GTM/GA4) */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
