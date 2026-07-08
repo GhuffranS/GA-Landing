@@ -1067,38 +1067,63 @@ html { scroll-padding-top: 104px; }
 .check-item__t { display: block; font-weight: var(--fw-semibold); color: var(--text-strong); font-size: var(--fs-sm); }
 .check-item__d { display: block; font-size: var(--fs-sm); color: var(--text-muted); margin-top: 2px; }
 
-/* ---- Partner marquee ---- */
-.marquee {
+/* ---- Brands carousel (two rows, opposite scroll) ----
+   Row A drifts left, row B drifts right, at slightly different speeds. Each row
+   holds its brand list twice, so translating one copy-width (−50% / +50%) loops
+   seamlessly. Edge mask fades both ends; hover pauses on pointer devices. */
+.brand-carousel {
+  margin-top: var(--space-7); /* 56px */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.marquee__track {
+.brand-row {
+  display: flex;
+  width: max-content;
+  gap: 20px;
+  will-change: transform;
+}
+.brand-row--a { animation: apcMarqueeL 45s linear infinite; }
+.brand-row--b { animation: apcMarqueeR 41s linear infinite; }
+@keyframes apcMarqueeL { from { transform: translateX(0); }     to { transform: translateX(-50%); } }
+@keyframes apcMarqueeR { from { transform: translateX(-50%); }  to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .brand-row--a, .brand-row--b { animation: none; }
+}
+.brand-tile {
+  flex: none;
+  width: 200px;
+  height: 112px;
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  width: max-content;
-  animation: apc-marquee 42s linear infinite;
-}
-.marquee:hover .marquee__track { animation-play-state: paused; }
-@keyframes apc-marquee { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
-.logo-tile {
-  display: inline-flex; align-items: center; justify-content: center;
-  flex: none;
-  width: 168px; height: 78px;
-  background: var(--surface-card);
+  justify-content: center;
+  background: #fff;
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xs);
-  padding: 0 var(--space-3);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(24, 24, 27, 0.04);
 }
-.logo-tile img {
-  max-height: 40px; width: auto; object-fit: contain;
-  filter: grayscale(1); opacity: 0.72;
-  transition: opacity var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+.brand-tile img {
+  width: var(--w);
+  height: var(--h);
+  object-fit: contain;
+  /* multiply drops any white logo padding into the white card */
+  mix-blend-mode: multiply;
 }
-.logo-tile:hover img { filter: none; opacity: 1; }
+/* --bp-sm 640: trimmer cards + logos on mobile */
+@media (max-width: 640px) {
+  .brand-carousel {
+    margin-top: var(--space-5); /* 40px */
+    gap: 14px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .brand-row { gap: 14px; }
+  .brand-tile { width: 148px; height: 84px; border-radius: 6px; }
+  .brand-tile img { width: var(--wm); height: var(--hm); }
+}
 
 /* ---- Tall benefits photo ---- */
 .benefit-photo {
